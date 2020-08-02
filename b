@@ -7,6 +7,7 @@ NC='\033[0m' # No Color
 
 if [ $1 ]
 then 
+    rm ./$1.out -f
     printf "${YELLOW}build${NC} ${YELLOW}$1${NC}.cpp\n" &&
     g++ $1.cpp -o $1.out --std=c++11 &&
     printf "${RED}run${NC} ${YELLOW}$1${NC}.cpp\n" &&

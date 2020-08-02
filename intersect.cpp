@@ -20,7 +20,6 @@ public:
 
         while (it1 != nums1.end() && it2 != nums2.end())
         {
-            //cout << "1: " << *it1 << ", 2: " << *it2 << endl;
             if (*it1 > *it2)
             {
                 it2++;
@@ -30,9 +29,8 @@ public:
             {
                 it1++;
                 continue;
-            }            
+            }
             ret.push_back(*it1);
-            //cout << "push: " << *it1 << endl;
             it1++;
             it2++;
         }

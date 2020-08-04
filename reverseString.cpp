@@ -72,7 +72,7 @@ int main()
 
     Solution *sol = new Solution();
 
-    vector<char> nums3 = {'a', 'b', 'c'};
+    vector<char> nums3 = {'a', 'b', 'c', 'd'};
     sol->reverseString(nums3);
     printVec(nums3);
     return 0;

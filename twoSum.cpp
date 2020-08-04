@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <algorithm>
 using namespace std;
 
@@ -10,22 +11,17 @@ class Solution
 public:
     vector<int> twoSum(vector<int> &nums, int target)
     {
-        vector<int> ret;
         int count = nums.size();
-        for (int i = 0, j = 0; i < count; i++)
+        unordered_map<int, int> map;
+        map[nums[0]] = 0;
+        for (int i = 1; i < count; i++)
         {
-            while (j != count && nums[i] + nums[j] != target)
-            {
-                j++;
+            if(map.find(target - nums[i])!=map.end()){
+                return{map[target - nums[i]], i};
             }
-            if(j == count){
-                j = 0;
-                continue;
-            }
-            ret.push_back(i);
-            ret.push_back(j);
-            return ret;
+            map[nums[i]] = i;
         }
+        return {};
     }
 };
 void printVec(vector<int> &vec)
@@ -45,10 +41,11 @@ void printVec(vector<int> &vec)
 
 int main()
 {
-    vector<int> nums1 = {1, 2, 3, 5, 6, 3, 2};
+    vector<int> nums1 = {3,2,4};
 
     Solution *sol = new Solution();
-    sol->twoSum(nums1, 11);
-    printVec(nums1);
+    auto ret = sol->twoSum(nums1, 6);
+    printVec(ret);
+    delete sol;
     return 0;
 }

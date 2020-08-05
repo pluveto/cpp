@@ -13,34 +13,21 @@ void printMat(vector<vector<T>> &mat);
 class Solution
 {
 public:
-
-    bool fuck(string s)
+    int myAtoi(string str)
     {
-        int size = s.size();
-        char *shit = new char[size];
-        int cursor = 0;
-        int i;
-        for (i = 0; i < size; i++)
+        int size = str.size(), sign = 1, i = 0;
+        long ret = 0;
+        while (str[i] == ' ') i++;
+        if (str[i] == '-' && ++i)  sign = -1;
+        else if (str[i] == '+') i++;
+        else if (!('0' <= str[i] && str[i] <= '9')) return 0;
+        for (; i < size; i++)
         {
-            if (('0' <= s[i] && s[i] <= '9') || ('a' <= s[i] && s[i] <= 'z'))
-            {
-                shit[cursor++] = (s[i]);
-            }
-            else if ('A' <= s[i] && s[i] <= 'Z')
-            {
-                shit[cursor++] = (s[i] - ('Z' - 'z'));
-            }
+            if (!('0' <= str[i] && str[i] <= '9')) break;
+            ret = ret * 10 + str[i] - '0';
+            if (ret > INT32_MAX) return sign == 1? INT32_MAX: INT32_MIN;
         }
-        for (i = 0; i < cursor; i++)
-        {
-            cout << shit[i] << " " << shit[cursor - i - 1] << endl;
-            if (shit[i] != shit[cursor - i - 1])
-            {
-                return false;
-            }
-        }
-        delete[] shit;
-        return true;
+        return ret * sign;
     }
 };
 
@@ -78,24 +65,21 @@ void printMat(vector<vector<T>> &mat)
 
 int main()
 {
-    vector<vector<int>> nums1 = {
-        {5, 1, 9, 11},
-        {2, 4, 8, 10},
-        {13, 3, 6, 7},
-        {15, 14, 12, 16},
-    };
-
-    vector<vector<int>> nums2 = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9},
-    };
-
     Solution *sol = new Solution();
-
-    vector<char> nums3 = {'a', 'b', 'c', 'd'};
-    auto s = "rat", t = "car";
-    cout << sol->isPalindrome("A man, a plan, a canal: Panama");
+    cout << sol->myAtoi("+1") << " "
+         << "1" << endl;
+    cout << sol->myAtoi("   -42") << " "
+         << "-42" << endl;
+    cout << sol->myAtoi("4193 with words") << " "
+         << "4193" << endl;
+    cout << sol->myAtoi("words and 987") << " "
+         << "0" << endl;
+    cout << sol->myAtoi("-91283472332") << " "
+         << "-2147483648" << endl;
+    cout << sol->myAtoi("-+1") << " "
+         << "0" << endl;
+    cout << sol->myAtoi(" b11228552307") << " "
+         << "0" << endl;
     //printVec(nums3);
     return 0;
 }

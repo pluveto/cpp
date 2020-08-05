@@ -16,6 +16,26 @@ public:
     bool isPalindrome(string s)
     {
         int size = s.size();
+        int i, j;
+        for (i = 0, j = size - 1; i != j; i++ && j--)
+        {
+            while(i!=j && !(('0' <= s[i] && s[i] <= '9') || ('a' <= s[i] && s[i] <= 'z')||('A' <= s[i] && s[i] <= 'Z'))){
+                i++;
+            }
+            while(i!=j && !(('0' <= s[j] && s[j] <= '9') || ('a' <= s[j] && s[j] <= 'z')||('A' <= s[j] && s[j] <= 'Z'))){
+                j--;
+            }
+            cout << s[i] << " " << s[j] << endl;
+            if (s[i] != s[j])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    bool fuck(string s)
+    {
+        int size = s.size();
         char *shit = new char[size];
         int cursor = 0;
         int i;

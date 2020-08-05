@@ -15,21 +15,14 @@ class Solution
 public:
     int reverse(int x)
     {
-        int c = getNumerCount(x);
-        cout << getNumerCount(x) << endl;
-        cout << pow(10, c) - x << endl;
-        return 0;
-    }
-    short getNumerCount(int x)
-    {
-        int ret = 0;
+        long ret = 0;
         while (x)
         {
+            ret = ret * 10 + x % 10;
+            if (ret > INT32_MAX || ret < INT32_MIN) return 0;
             x /= 10;
-            ret++;
         }
-
-        return ret;        
+        return ret;
     }
 };
 
@@ -82,7 +75,7 @@ int main()
 
     Solution *sol = new Solution();
 
-    cout << sol->reverse(666);
+    cout << sol->reverse(-2147483648);
 
     return 0;
 }

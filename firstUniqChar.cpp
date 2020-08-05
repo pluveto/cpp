@@ -13,19 +13,25 @@ void printMat(vector<vector<T>> &mat);
 class Solution
 {
 public:
-    int reverse(int x)
+    int firstUniqChar(string s)
     {
-        long ret = 0;
-        while (x)
+        int size = s.size();
+        int map[26] = {};
+        int i;
+        for (i = 0; i < size; i++)
         {
-            ret = ret * 10 + x % 10;
-            if (ret > INT32_MAX || ret < INT32_MIN) return 0;
-            x /= 10;
+            map[s[i] - 'a']++;
         }
-        return ret;
+        for (i = 0; i < size; i++)
+        {
+            if (map[s[i] - 'a'] == 1)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 };
-
 template <class T>
 void printVec(vector<T> &vec)
 {
@@ -75,7 +81,7 @@ int main()
 
     Solution *sol = new Solution();
 
-    cout << sol->reverse(-2147483648);
+    cout << sol->firstUniqChar("loveleetcode");
 
     return 0;
 }

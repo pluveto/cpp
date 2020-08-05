@@ -16,29 +16,32 @@ public:
     bool isPalindrome(string s)
     {
         int size = s.size();
-        char *shit = new char[size];
-        int cursor = 0;
-        int i;
-        for (i = 0; i < size; i++)
+        if (size < 2)
+            return 1;
+        int i, j;
+        for (i = 0, j = size - 1; i < j; i++, j--)
         {
-            if (('0' <= s[i] && s[i] <= '9') || ('a' <= s[i] && s[i] <= 'z'))
+            while (i < j && !(('0' <= s[i] && s[i] <= '9') || ('a' <= s[i] && s[i] <= 'z') || ('A' <= s[i] && s[i] <= 'Z')))
             {
-                shit[cursor++] = (s[i]);
+                i++;
             }
-            else if ('A' <= s[i] && s[i] <= 'Z')
+            while (i <j && !(('0' <= s[j] && s[j] <= '9') || ('a' <= s[j] && s[j] <= 'z') || ('A' <= s[j] && s[j] <= 'Z')))
             {
-                shit[cursor++] = (s[i] - ('Z' - 'z'));
+                j--;
             }
-        }
-        for (i = 0; i < cursor; i++)
-        {
-            cout << shit[i] << " " << shit[cursor - i - 1] << endl;
-            if (shit[i] != shit[cursor - i - 1])
+            if (i == j)
+                break;
+            if (('A' <= s[j] && s[j] <= 'Z'))
+                s[j] -= ('A' - 'a');
+            if (('A' <= s[i] && s[i] <= 'Z'))
+                s[i] -= ('A' - 'a');
+
+            //cout << i << ":" << s[i] << ", " << j << ":" << s[j] << endl;
+            if (s[i] != s[j])
             {
                 return false;
             }
         }
-        delete[] shit;
         return true;
     }
 };
@@ -94,7 +97,7 @@ int main()
 
     vector<char> nums3 = {'a', 'b', 'c', 'd'};
     auto s = "rat", t = "car";
-    cout << sol->isPalindrome("A man, a plan, a canal: Panama");
+    cout << sol->isPalindrome("aa");
     //printVec(nums3);
     return 0;
 }
